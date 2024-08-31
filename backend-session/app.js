@@ -24,9 +24,8 @@ app.use(cors({ // Permitir solicitudes desde el front-end
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(session({
-    secret: 'mi-string-secreto3215',
+    secret: 'mi_secreto',
     resave: false,
     saveUninitialized: true,
     cookie: { 

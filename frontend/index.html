@@ -55,19 +55,15 @@
                 return;
             }
 
-            fetch('http://localhost:4000/login', {
-                method: 'POST',
-                credentials: 'include', // Importante para enviar las cookies de sesión
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            })
             try {
-                const response = await fetch('http://localhost:4000/session', {
-                    credentials: 'include' // Importante para obtener las cookies de sesión
-                });
-                const divError = document.getElementById('message')
+                const response = await fetch('http://localhost:4000/login', {
+                    method: 'POST',
+                    credentials: 'include', // Importante para enviar las cookies de sesión
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                })
                 
                 if(!response.ok) {
                     divError.innerText = 'Credenciales inválidas';
