@@ -1,8 +1,12 @@
 import { Router } from 'express';
-import { login, validarSesion, logout } from '../controllers/authController.js';
+import { login, validarSesion, logout, register } from '../controllers/authController.js';
 import validarJwt from '../middlewares/validar-jwt.js';
 
 const router = Router();
+
+// Ruta de registro de usuario
+router.post('/register', userController.register);
+
 
 // Ruta de inicio de sesión
 router.post('/login', login);

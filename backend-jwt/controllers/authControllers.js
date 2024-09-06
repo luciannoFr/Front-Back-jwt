@@ -1,4 +1,4 @@
-import generarToken from '../utils/generateToken.js'; // Importar la función desde el archivo
+import generarToken from '../helpers/generar-jwt.js'; // Importar la función desde el archivo
 import { database } from '../db/connection.js';
 
 // Controlador para el inicio de sesión
@@ -31,8 +31,8 @@ export const login = async (req, res) => {
     }
 };
 
-// Controlador para obtener los datos de la sesión
-export const obtenerSesion = (req, res) => {
+// Controlador para validar la sesión del usuario
+export const validarSesion = (req, res) => {
     if (req.session.userId) {
         return res.json({
             loggedIn: true,
@@ -52,5 +52,27 @@ export const logout = (req, res) => {
         }
         res.clearCookie('connect.sid'); // Eliminar la cookie de sesión
         return res.json({ message: 'Sesión cerrada exitosamente' });
+    });
+};
+
+// Controlador para registrar un nuevo usuario (aún por implementar)
+export const register = async (req, res) => {
+    const { username, password } = req.body;
+
+    // Verificar si el usuario ya existe
+    const existingUser = database.user.find(u => u.username === username);
+    
+    if (existingUser) {
+        return res.status(400).json({ message: 'El nombre de usuario ya está en uso' });
+    }
+
+    // Crear un nuevo usuario (debería implementar lógica para almacenar el nuevo usuario en la base de datos)
+    const newUser = { id: Date.now(), username, password }; // Aquí usarías una base de datos real para almacenar al usuario
+
+    database.user.push(newUser); // Simulamos el almacenamiento en la base de datos
+
+    return res.status(201).json({
+        message: 'Usuario registrado exitosamente',
+        user: { id: newUser.id, username: newUser.username }
     });
 };
