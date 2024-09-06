@@ -6,7 +6,7 @@ export default ( userId ) => {
         const payload = { userId };
 
         jwt.sign(payload, SECRET_KEY, {
-            expiresIn: '4h' // El token expira en 4 horas
+            expiresIn: '5h' // El token expira en 5 horas (actualizado)
         }, (error, token) => {
             if (error) {
                 console.log(error);
