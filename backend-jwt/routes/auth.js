@@ -5,7 +5,7 @@ import validarJwt from '../middlewares/validar-jwt.js';
 const router = Router();
 
 // Ruta de registro de usuario
-router.post('/register', userController.register);
+router.post('/register', register);
 
 
 // Ruta de inicio de sesión
